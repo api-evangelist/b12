@@ -1,9 +1,32 @@
 aid: b12
 name: B12
-description: 'B12 is a company surfaced as a portfolio company of general-catalyst and added to the API
-  Evangelist network as a stub for enrichment. Sector: enterprise. This profile is a lead awaiting the
-  enrichment pipeline.'
+description: >-
+  B12 is an AI-powered website builder that generates professional websites,
+  online stores, and web apps from a short prompt. Founded on a human-in-the-loop
+  model and now driven by its B12 3.0 AI Agent (launched February 2026), the
+  platform lets solopreneurs, consultants, freelancers, and growing teams
+  describe a business idea and launch a site in minutes, then run that business
+  online with built-in tools for SEO, online payments and invoicing, scheduling,
+  email marketing, client intake, contact management, and contracts with
+  eSignatures. B12 offers self-serve DIY plans as well as Expert plans where its
+  design and content team handles setup and ongoing updates. Over 4 million
+  websites have been built on B12. B12 exposes its website-generation capability
+  to AI agents through a published Model Context Protocol (MCP) server, a Claude
+  plugin, and a Website Generator GPT, but does not publish a general-purpose
+  public REST API.
 url: https://raw.githubusercontent.com/api-evangelist/b12/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://www.b12.io/static-assets/images/ai-website-builder.jpeg
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -12,10 +35,18 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
 - Enterprise
+- Website Builder
+- AI
+- No-Code
+- Small Business
+- Website Generation
+- Model Context Protocol
+- SEO
+- Payments
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -25,3 +56,31 @@ maintainers:
 common:
 - type: Website
   url: https://www.b12.io
+- type: MCPServer
+  name: B12 Website Generator MCP Server
+  url: mcp/b12-mcp.yml
+- type: LLMsTxt
+  url: llms/b12-llms.txt
+- type: DomainSecurity
+  url: security/b12-domain-security.yml
+- type: GitHubOrganization
+  url: https://github.com/b12io
+- type: HelpCenter
+  url: https://support.b12.io/en
+- type: Support
+  url: https://www.b12.io/support/
+- type: Blog
+  url: https://www.b12.io/resource-center/
+- type: Pricing
+  url: https://www.b12.io/pricing/
+- type: SignUp
+  url: https://b12.io/signup/
+- type: TermsOfService
+  url: https://www.b12.io/terms-of-service/
+- type: PrivacyPolicy
+  url: https://www.b12.io/privacy-policy/
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

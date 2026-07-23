@@ -1,0 +1,131 @@
+# B12 — The Easiest AI Website Builder
+
+> B12 is an AI-powered platform that generates professional websites, online
+> stores, and web apps from a short prompt. Describe your idea and launch in
+> minutes, then grow your business with built-in tools for SEO, online
+> payments, scheduling, email marketing, contracts, and client management.
+> Over 4 million websites have been built on B12. Customers range from
+> solopreneurs and consultants to freelancers, business owners, and
+> growing teams across every industry — anyone looking to build and scale
+> a business with AI.
+
+## Key Pages
+
+- [Homepage](https://www.b12.io/): Describe your idea and launch a website, store, or web app in minutes
+- [AI Website Builder](https://www.b12.io/ai-website-builder/): Generate a complete, professional website with AI
+- [AI Website Prompt Gallery](https://www.b12.io/ai-website-prompt-gallery/): Browse and remix AI-generated websites, stores, and apps
+- [Pricing](https://www.b12.io/pricing/): DIY plans (Free, Website, Website + Client Engagement) and Expert plans with B12's team
+- [Product Overview](https://www.b12.io/product-overview/): Full feature overview of B12's platform
+- [How It Works](https://www.b12.io/how-it-works/): The three-step build process: describe, generate, launch
+- [Resource Center / Blog](https://www.b12.io/resource-center/): Guides, tips, and resources for growing a business online
+- [Help Center](https://support.b12.io/en): Official B12 documentation, how-tos, and troubleshooting articles
+- [About](https://www.b12.io/about/): Company background and mission
+
+## Products
+
+### Websites
+AI-generated websites with on-page SEO, blogging, third-party
+integrations, and built-in conversion tools. Expert help available from the
+B12 design and content team.
+
+### Client Engagement
+Tools to reach, acquire, and get paid by clients — client intake forms,
+contact manager, email marketing and automation, payments
+and invoicing, and contracts with eSignatures.
+
+### AI Tools
+- [AI Agent](https://www.b12.io/ai-agent/): Conversational AI that builds and edits your site
+- [Website Generator GPT](https://www.b12.io/gpts/): Generate a B12 website from ChatGPT
+- [Free AI tools](https://www.b12.io/tools/): Free generator tools for marketing, content, and design
+- [Orchestra](https://orchestra.b12.io/orchestra/): B12's AI orchestration product
+
+## Plans
+
+B12 offers two plan families. **DIY plans** are self-serve subscriptions
+where the customer builds and manages their own site with B12's AI tools.
+**Expert plans** include hands-on work from B12's design, content, and
+launch team in addition to the platform.
+
+### DIY Plans
+
+- **Free** — Get online quickly on a B12-branded subdomain. Includes mobile responsive website, AI website generation, and the visual editor.
+- **Website** — Launch a polished website on a custom domain. Adds advanced team management, analytics, integrations, and ad removal.
+- **Website + Client Engagement** — Everything in Website, plus the tools to run a service business online: custom email address, online payments and invoicing, client intake, email marketing, contact manager, contracts and eSignatures, and file uploads.
+
+### Expert Plans
+
+- **Professional** — B12's team handles website setup and ongoing updates. Includes all client engagement features, business directory listings, and phone support.
+- **Advanced** — Designed for businesses with teams that need more seats, more coordination, and priority support.
+
+## Commerce
+
+- Plans are billed in USD, with monthly or annual billing intervals.
+- AI credit allowances, seat counts, and current promotional offers vary by plan and may change over time.
+- For current pricing, plan comparisons, and the most up-to-date feature list, see https://www.b12.io/pricing/.
+
+## Help Center & Guides
+
+The B12 Help Center at https://support.b12.io/en answers common customer
+questions about using B12. Below are articles for the current
+version of B12 (B12 3.0, launched February 2026). For the complete library,
+browse the help center directly.
+
+### Getting Started with B12 3.0
+
+- [Welcome to B12 3.0](https://support.b12.io/en/v3/welcome-to-b12-websites-3-0): Overview of B12's latest version, which includes whole-website code generation and an AI Agent.
+- [B12 3.0 Features](https://support.b12.io/en/v3/websites-3.0-features): What's included in the current version.
+- [Previewing and publishing your B12 website](https://support.b12.io/en/v3/previewing-and-publishing-your-website)
+
+### Building and Editing with AI
+
+- [Editing your website with the AI Agent](https://support.b12.io/en/v3/editing-your-website-with-the-ai-agent)
+- [Left sidebar editing in B12 3.0](https://support.b12.io/en/v3/left-pane-editing-in-b12-3.0)
+- [Adjusting images with Visual edit](https://support.b12.io/en/v3/editing-images)
+- [Generating images with the AI Agent](https://support.b12.io/en/v3/generating-images-with-the-ai-agent)
+- [Editing your website's code](https://support.b12.io/en/v3/editing-your-websites-code)
+- [AI credits](https://support.b12.io/en/v3/ai-message-credits): How AI credits work across plans.
+
+### Domains and Custom Email
+
+- [Publishing your website on a custom domain](https://support.b12.io/en/publishing-your-website-on-a-custom-domain)
+- [Domains and your B12 website](https://support.b12.io/en/domains-and-your-b12-website)
+- [Customizing your b12sites.com subdomain](https://support.b12.io/en/updating-b12-sites-subdomain)
+
+### Client Engagement Tools
+
+- [Getting started with B12 Payments and Invoicing](https://support.b12.io/en/getting-started-payments-and-invoicing)
+- [Composing and sending emails with B12 Email Marketing](https://support.b12.io/en/composing-and-sending-emails-with-b12-email-marketing)
+
+### Forms and Conversion
+
+- [Adding and editing contact forms](https://support.b12.io/en/v3/adding-and-managing-forms)
+- [Collecting sensitive information in forms](https://support.b12.io/en/v3/collecting-sensitive-information-in-websites)
+
+### SEO and Discoverability
+
+- [Improving your website's SEO](https://support.b12.io/en/v3/seo-best-practices)
+- [Why can't I see my website on Google?](https://support.b12.io/en/v3/why-can-t-i-see-my-site-on-google)
+- [Adding your website to Google Search Console](https://support.b12.io/en/v3/add-your-website-to-the-google-search-console)
+- [Adding Google Analytics to your website](https://support.b12.io/en/v3/connect-google-analytics-to-your-website)
+- [Viewing your website analytics](https://support.b12.io/en/v3/view-your-websites-performance-and-search-analytics)
+- [Adding URL redirects](https://support.b12.io/en/v3/adding-page-url-redirects)
+
+### Integrations
+
+- [Adding a third-party contact form](https://support.b12.io/en/v3/integrate-3rd-party-forms)
+- [Adding third-party payment integrations (non-US)](https://support.b12.io/en/v3/3rd-party-payment-options-for-non-us)
+- [Creating a QR code for your website](https://support.b12.io/en/v3/creating-a-qr-code-for-your-website)
+- [Adding a favicon](https://support.b12.io/en/v3/how-to-add-a-favicon)
+
+### Account and Billing
+
+- [I forgot my password](https://support.b12.io/en/forgot-my-password)
+- [Updating your payment method](https://support.b12.io/en/how-do-i-update-my-credit-card)
+- [Changing your B12 account login email and contact information](https://support.b12.io/en/changing-your-b12-account-login-email-and-contact-information)
+- [Viewing your B12 payment history and receipts](https://support.b12.io/en/view-your-b12-payment-history-and-receipts)
+
+### Troubleshooting
+
+- [Troubleshooting issues in B12 3.0](https://support.b12.io/en/v3/troubleshooting-issues-in-websites)
+- [Troubleshooting 404 errors](https://support.b12.io/en/v3/troubleshooting-404-errors)
+- [Unpublishing your website](https://support.b12.io/en/v3/unpublishing-your-website)

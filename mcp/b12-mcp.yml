@@ -1,0 +1,39 @@
+generated: '2026-07-18'
+method: searched
+status: published
+source: https://github.com/b12io/website-generator-mcp-server
+server:
+  name: b12-website-generator
+  display_name: B12 Website Generator
+  transport: stdio
+  package: '@b12/website-generator-mcp-server'
+  version: 1.0.3
+  bin: b12-mcp-server
+  install: npx -y @b12/website-generator-mcp-server
+  runtime: node
+  license: Apache-2.0
+  author: B12.io
+  contact: hello@b12.io
+  homepage: https://b12.io/
+  npm: https://www.npmjs.com/package/@b12/website-generator-mcp-server
+  repository: https://github.com/b12io/website-generator-mcp-server
+  distribution:
+    - kind: desktop-extension
+      format: dxt
+      manifest: manifest.json
+    - kind: npm
+      package: '@b12/website-generator-mcp-server'
+tools:
+  - name: generate_website
+    title: Generate Website
+    description: Generates a website from a business/project name and short description, then presents a link (in markdown format) to sign up and see the website.
+    inputs:
+      - name: name
+        description: The name of the business.
+      - name: description
+        description: The short description of the business in less than 1000 characters.
+notes: >-
+  B12 also publishes a Claude plugin (github.com/b12io/b12-claude-plugin) and a
+  Website Generator GPT (https://www.b12.io/gpts/) that wrap the same
+  website-generation capability. B12 does not publish a general-purpose public
+  REST API; the MCP server is a single-tool website generation surface.
