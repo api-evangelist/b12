@@ -11,9 +11,10 @@ description: >-
   eSignatures. B12 offers self-serve DIY plans as well as Expert plans where its
   design and content team handles setup and ongoing updates. Over 4 million
   websites have been built on B12. B12 exposes its website-generation capability
-  to AI agents through a published Model Context Protocol (MCP) server, a Claude
-  plugin, and a Website Generator GPT, but does not publish a general-purpose
-  public REST API.
+  to AI agents through two live, anonymous, remote Model Context Protocol (MCP)
+  endpoints, two provider-published Claude Agent Skills, and a Website Generator
+  GPT, but publishes no general-purpose public REST API, no OpenAPI, and no
+  developer portal.
 url: https://raw.githubusercontent.com/api-evangelist/b12/refs/heads/main/apis.yml
 accessModel:
   pricing: unknown
@@ -31,11 +32,11 @@ x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - general-catalyst
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: live MCP surface probed; provider-published skills, llms.txt and packages harvested
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-18'
+modified: '2026-08-13'
 tags:
 - Company
 - Enterprise
@@ -47,7 +48,35 @@ tags:
 - Model Context Protocol
 - SEO
 - Payments
-apis: []
+apis:
+- name: B12 Website Generator MCP Server
+  description: >-
+    B12's Model Context Protocol server, and the only machine-callable surface
+    B12 publishes. It exposes a single tool, generate_website, which builds a
+    website draft with AI from a business name, description, image keywords and
+    subtitle, then returns a static preview image and a signup link to claim and
+    edit the site. Two remote deployments run in parallel: mcp.b12.io/mcp serves
+    Claude with an MCP-UI preview resource, and b12.io/mcp serves ChatGPT Apps.
+    Both answer anonymously with no API key, token or OAuth challenge.
+  humanURL: https://github.com/b12io/website-generator-mcp-server
+  baseURL: https://mcp.b12.io/mcp
+  tags:
+  - Model Context Protocol
+  - Website Generation
+  - AI
+  properties:
+  - type: MCPServer
+    url: mcp/b12-mcp.yml
+  - type: Authentication
+    url: authentication/b12-authentication.yml
+  - type: ErrorCatalog
+    url: errors/b12-problem-types.yml
+  - type: Conventions
+    url: conventions/b12-conventions.yml
+  - type: RateLimits
+    url: rate-limits/b12-rate-limits.yml
+  - type: SourceCode
+    url: https://github.com/b12io/website-generator-mcp
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -79,8 +108,40 @@ common:
   url: https://www.b12.io/terms-of-service/
 - type: PrivacyPolicy
   url: https://www.b12.io/privacy-policy/
+- type: Packages
+  url: packages/b12-packages.yml
+- type: AgentSkill
+  name: B12 Claude Agent Skills (provider-published)
+  url: skills/_index.yml
+- type: Authentication
+  url: authentication/b12-authentication.yml
+- type: ErrorCatalog
+  url: errors/b12-problem-types.yml
+- type: Conventions
+  url: conventions/b12-conventions.yml
+- type: Conformance
+  url: conformance/b12-conformance.yml
+- type: Lifecycle
+  url: lifecycle/b12-lifecycle.yml
+- type: Components
+  url: components/b12-components.yml
+- type: RateLimits
+  url: rate-limits/b12-rate-limits.yml
+- type: Plans
+  url: plans/b12-plans-pricing.yml
+- type: ContentSignal
+  name: Content Signals declaration in robots.txt (ai-train=yes, search=yes, ai-input=yes)
+  url: well-known/b12-robots.txt
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 12
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
+x-coverage:
+  state: covered
+  note: >-
+    B12 has no REST API and no OpenAPI, but it is not a thin profile: its agent
+    surface is real, live and fully probeable. Two anonymous remote MCP
+    endpoints returned complete tool schemas, and B12 publishes its own Agent
+    Skills, an llms.txt and a Content Signals declaration.
+  checked: '2026-08-13'
