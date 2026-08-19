@@ -1,0 +1,83 @@
+generated: '2026-08-13'
+method: probed
+source: live GET probes of every B12 host
+host: https://www.b12.io
+
+summary:
+  well_known_hits: 0
+  note: >-
+    B12 serves NO /.well-known/ document on any host. Every path below returned
+    HTTP 404 with the site's 220KB HTML 404 shell — a soft-404 body, not a
+    document. No WellKnown or SecurityTxt pointer is emitted for this repo,
+    because none is earned.
+
+documents:
+- {path: /.well-known/security.txt, host: www.b12.io, status: 404, content_type: text/html, file: null}
+- {path: /.well-known/openid-configuration, host: www.b12.io, status: 404, content_type: text/html, file: null}
+- {path: /.well-known/oauth-authorization-server, host: www.b12.io, status: 404, content_type: text/html, file: null}
+- {path: /.well-known/oauth-protected-resource, host: www.b12.io, status: 404, content_type: text/html, file: null}
+- {path: /.well-known/api-catalog, host: www.b12.io, status: 404, content_type: text/html, file: null}
+- {path: /.well-known/ai-plugin.json, host: www.b12.io, status: 404, content_type: text/html, file: null}
+- {path: /.well-known/agent-card.json, host: www.b12.io, status: 404, content_type: text/html, file: null}
+- {path: /.well-known/agent.json, host: www.b12.io, status: 404, content_type: text/html, file: null}
+- {path: /.well-known/agent-card.json, host: mcp.b12.io, status: 404, content_type: text/html, file: null}
+- {path: /.well-known/oauth-protected-resource, host: mcp.b12.io, status: 404, content_type: text/html, file: null}
+- {path: /.well-known/oauth-authorization-server, host: mcp.b12.io, status: 404, content_type: text/html, file: null}
+- {path: /.well-known/agent-card.json, host: orchestra.b12.io, status: 404, content_type: text/html, file: null}
+
+# Not a /.well-known/ path, but the same discovery layer, and here it is a real
+# served document with real machine-readable consent semantics.
+other_documents:
+- path: /robots.txt
+  host: www.b12.io
+  status: 200
+  content_type: text/plain
+  bytes: 692
+  file: b12-robots.txt
+  carries:
+  - name: Content-Signal
+    value: 'ai-train=yes, search=yes, ai-input=yes'
+    spec: Cloudflare Content Signals Policy
+    note: >-
+      An explicit machine-readable AI-usage declaration. B12 opts IN to all
+      three signals, and names the reason in a comment: "we want agents to learn
+      about B12". Rare posture — most publishers restrict ai-train.
+  - name: AI crawler allow-list
+    value: >-
+      GPTBot, OAI-SearchBot, Claude-Web, anthropic-ai, Google-Extended,
+      PerplexityBot, Amazonbot, CCBot all explicitly Allow: /
+  - name: Sitemap
+    value: https://www.b12.io/sitemap-index.xml
+- path: /llms.txt
+  host: www.b12.io
+  status: 200
+  content_type: text/plain
+  bytes: 7820
+  file: ../llms/b12-llms.txt
+  note: >-
+    Provider-published and verified byte-identical to the copy already in this
+    repo, so llms/b12-llms.txt is a verbatim harvest, not a generated file.
+
+agent_card:
+  found: false
+  note: >-
+    Probed both the A2A 1.0.0 canonical path and the pre-0.3 legacy path on
+    www.b12.io, mcp.b12.io and orchestra.b12.io. All 404. Per the pipeline
+    contract nothing is written to a2a/ — an agent card is search-only and must
+    never be authored on a provider's behalf.
+
+hosts_probed:
+- {host: www.b12.io, resolves: true}
+- {host: b12.io, resolves: true}
+- {host: mcp.b12.io, resolves: true, note: CNAME to b12.io; serves the MCP endpoint at /mcp}
+- {host: orchestra.b12.io, resolves: true}
+- {host: support.b12.io, resolves: true}
+- {host: api.b12.io, resolves: false, note: NXDOMAIN — there is no API host}
+- {host: developer.b12.io, resolves: false, note: NXDOMAIN}
+- {host: docs.b12.io, resolves: false, note: NXDOMAIN}
+- {host: status.b12.io, resolves: false, note: NXDOMAIN}
+- {host: trust.b12.io, resolves: false, note: NXDOMAIN}
+- {host: app.b12.io, resolves: false, note: NXDOMAIN}
+
+x-evidence:
+  fetched: '2026-08-13'

@@ -1,0 +1,115 @@
+generated: '2026-08-13'
+method: probed
+source: https://mcp.b12.io/mcp
+note: >-
+  Cross-cutting semantics for B12's only machine-callable surface, the MCP
+  server. There is no REST API, so there is no HTTP resource convention to
+  record — the conventions here are JSON-RPC and MCP transport conventions,
+  established by live probe.
+
+surface:
+  kind: mcp
+  protocol: JSON-RPC 2.0 over Streamable HTTP
+  protocol_version: '2025-06-18'
+  endpoints:
+  - https://mcp.b12.io/mcp
+  - https://b12.io/mcp
+  rest: none
+  graphql: none
+  webhooks: none
+
+authentication:
+  style: none
+  detail: anonymous; no key, no token, no OAuth challenge
+  see: authentication/b12-authentication.yml
+
+content_negotiation:
+  accept_required: 'application/json, text/event-stream'
+  enforced: true
+  on_violation: JSON-RPC -32600, HTTP 406 on GET / HTTP 200 on a partial Accept
+  response_content_type:
+    mcp.b12.io: text/event-stream (SSE frames)
+    b12.io: application/json
+  note: >-
+    The two deployments disagree on response media type for an identical
+    request. A client hard-coded to parse one will fail against the other.
+
+idempotency:
+  supported: false
+  header: null
+  scope: null
+  retention: null
+  evidence: >-
+    The generate_website tool description states: "To create a separate,
+    additional website, call the tool again." Its annotations set
+    readOnlyHint false and destructiveHint false. A repeated call with identical
+    arguments produces an additional website draft, not the original one.
+  agent_impact: >-
+    There is no safe retry. An agent that retries after a timeout or a dropped
+    SSE stream cannot tell whether the first call landed, and will create a
+    duplicate draft. No idempotency key is accepted and no request
+    de-duplication is documented.
+  note: >-
+    Recorded as an explicit NO. No Idempotency pointer is emitted in apis.yml,
+    because the provider does not offer idempotency on this surface.
+
+pagination:
+  supported: false
+  note: >-
+    tools/list, resources/list and prompts/list each return a complete array
+    with no nextCursor. The MCP cursor pagination mechanism is unused, which is
+    unremarkable at one tool and one resource.
+
+versioning:
+  scheme: mcp-protocol-negotiation
+  protocol_version: '2025-06-18'
+  server_version: 1.26.0
+  detail: >-
+    initialize echoes protocolVersion 2025-06-18 and serverInfo
+    {name: b12-mcp-server, version: 1.26.0}. Version is discovered by
+    handshake, not by URL path or header. There is no /v1/ in the endpoint.
+  published_policy: none
+  see: lifecycle/b12-lifecycle.yml
+
+request_tracing:
+  request_id_header: null
+  correlation: JSON-RPC `id` echoed on success
+  caveat: >-
+    On transport-level errors the server does NOT echo the id — it substitutes
+    the literal string "server-error", so a failed request cannot be correlated
+    back by id.
+
+error_envelope:
+  shape: JSON-RPC 2.0 error object
+  rfc9457: false
+  see: errors/b12-problem-types.yml
+
+rate_limit_signaling:
+  headers: none
+  detail: no X-RateLimit-*, no RateLimit-*, no Retry-After observed
+  see: rate-limits/b12-rate-limits.yml
+
+metadata_and_expansion:
+  metadata: >-
+    Tools carry an MCP `_meta` block. mcp.b12.io uses `_meta.ui` to bind an
+    MCP-UI resource; b12.io uses `openai/outputTemplate` and
+    `openai/toolInvocation` hints for ChatGPT Apps.
+  field_expansion: not applicable
+  sparse_fields: not applicable
+
+side_effects:
+  note: >-
+    generate_website is a WRITE. It provisions a website draft on B12
+    infrastructure and returns a static preview plus a signup link. It is
+    reachable with no credential, so an anonymous caller can cause B12-side
+    resource creation. openWorldHint is false — the tool does not reach beyond
+    B12's own domain.
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: 'https://mcp.b12.io/mcp', method: 'POST initialize', http_status: 200}
+  - {url: 'https://mcp.b12.io/mcp', method: 'POST tools/list', http_status: 200}
+  - {url: 'https://mcp.b12.io/mcp', method: 'POST resources/list', http_status: 200}
+  - {url: 'https://mcp.b12.io/mcp', method: 'POST prompts/list', http_status: 200, result: empty array}
+  - {url: 'https://b12.io/mcp', method: 'POST tools/list', http_status: 200}

@@ -1,0 +1,117 @@
+generated: '2026-08-13'
+method: searched
+source: https://registry.npmjs.org/ + https://github.com/b12io
+note: >-
+  B12 publishes no API client SDK, because it publishes no REST API. The npm
+  surface is a design system, an MCP server, and a Claude plugin. Registry
+  metadata was read from registry.npmjs.org; PyPI, RubyGems, crates.io,
+  Packagist, NuGet, Maven Central and pkg.go.dev have no first-party B12
+  package.
+
+packages:
+- language: javascript
+  registry: npm
+  name: '@b12/metronome'
+  url: https://www.npmjs.com/package/@b12/metronome
+  install: npm install @b12/metronome
+  version: 1.1.36
+  published: '2026-07-30'
+  official: true
+  license: Apache-2.0
+  repository: https://github.com/b12io/metronome
+  kind: design-system
+  release_count: 50
+  first_published: '2020-03-23'
+  description: >-
+    Metronome is the design system B12 uses for developing consistent user
+    experiences. Actively maintained — 50 releases, most recent two weeks before
+    this pass.
+  note: >-
+    UI component library, not an API client. Catalogued in full at
+    components/b12-components.yml.
+
+- language: javascript
+  registry: npm
+  name: '@b12/mcp-server'
+  url: https://www.npmjs.com/package/@b12/mcp-server
+  install: npx -y @b12/mcp-server
+  version: 1.0.1
+  published: '2025-04-03'
+  official: true
+  license: Apache-2.0
+  bin: b12-mcp-server
+  kind: mcp-server
+  release_count: 2
+  description: MCP server for b12.io.
+  note: >-
+    STALE, and orphaned from its own documentation. Last published 2025-04-03 —
+    over sixteen months before this pass, and well behind the remote server
+    B12 actually runs, which reports version 1.26.0. No B12 documentation points
+    at this package name.
+
+- language: javascript
+  registry: npm
+  name: '@b12/website-generator-mcp-server'
+  url: null
+  install: npx -y @b12/website-generator-mcp-server
+  version: null
+  published: null
+  official: true
+  license: Apache-2.0
+  kind: mcp-server
+  status: never-published
+  repository: https://github.com/b12io/website-generator-mcp-server
+  note: >-
+    CHECKED, NOT FOUND. The repository's package.json declares version 1.0.3 and
+    its README gives `npx -y @b12/website-generator-mcp-server` as the Claude
+    Desktop install command, but registry.npmjs.org returns HTTP 404 for that
+    name. B12's documented stdio install does not resolve; an agent following
+    the README cannot install this server. The working alternatives are the
+    remote endpoint https://mcp.b12.io/mcp or the .dxt desktop extension shipped
+    in the repo.
+
+third_party:
+- language: javascript
+  registry: npm
+  name: '@intentsolutionsio/b12-claude-plugin'
+  url: https://www.npmjs.com/package/@intentsolutionsio/b12-claude-plugin
+  version: 1.0.1
+  published: '2026-06-08'
+  official: false
+  note: >-
+    Republished by a third party (repository points at
+    jeremylongshore/claude-code-plugins-plus-skills), not by B12. B12's own
+    distribution is the b12io/b12-plugins marketplace.
+- language: javascript
+  registry: npm
+  name: b12-mui-theme
+  url: https://www.npmjs.com/package/b12-mui-theme
+  version: 1.0.0
+  published: '2026-02-07'
+  official: false
+  note: >-
+    Unrelated namesake — repository is gitlab.vbash.pp.ua/b12-drones/mui-theme,
+    a different "B12". Recorded here only so a later pass does not mistake it
+    for first-party.
+
+registries_checked:
+- {registry: npm, result: 3 first-party packages, 1 declared-but-unpublished}
+- {registry: pypi, result: none, probes: [b12 404, b12io 404, b12-sdk 404]}
+- {registry: rubygems, result: none}
+- {registry: crates.io, result: none}
+- {registry: packagist, result: none}
+- {registry: nuget, result: none}
+- {registry: maven-central, result: none}
+- {registry: pkg.go.dev, result: none}
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - url: https://registry.npmjs.org/@b12%2fmetronome
+    http_status: 200
+  - url: https://registry.npmjs.org/@b12%2fmcp-server
+    http_status: 200
+  - url: https://registry.npmjs.org/@b12%2fwebsite-generator-mcp-server
+    http_status: 404
+  - url: https://api.github.com/orgs/b12io/repos
+    http_status: 200

@@ -1,0 +1,93 @@
+generated: '2026-08-13'
+method: probed
+source: https://mcp.b12.io/mcp
+note: >-
+  B12 publishes no versioning policy, no deprecation policy, no SLA and no
+  status page. Everything recorded here was established by probe. No StatusPage
+  and no Deprecation pointer is emitted, because neither exists.
+
+versioning:
+  scheme: mcp-protocol-negotiation
+  current: '2025-06-18'
+  server_version: 1.26.0
+  docs: null
+  detail: >-
+    Version is discovered through the MCP initialize handshake, not through a
+    URL path, header or media type. There is no /v1/ in the endpoint and no
+    published version history for the server.
+
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No deprecation policy is published and no RFC 8594 Sunset or Deprecation
+    header was observed. There is no announced notice period for a breaking
+    change to the tool schema.
+
+sla:
+  url: null
+  uptime_target: null
+  note: No SLA or uptime commitment is published for the MCP surface.
+
+status_page:
+  url: null
+  found: false
+  probes:
+  - {url: 'https://status.b12.io/', result: NXDOMAIN}
+  - {url: 'https://www.b12.io/status/', http_status: 404}
+
+changelog:
+  url: null
+  found: false
+  probes:
+  - {url: 'https://www.b12.io/changelog/', http_status: 404}
+  - {url: 'https://www.b12.io/whats-new/', http_status: 404}
+  note: >-
+    No dated changelog. The only version signal an integrator can observe is the
+    serverInfo.version returned by initialize, which changes without notice.
+
+roadmap:
+  url: null
+  found: false
+  probe: {url: 'https://www.b12.io/roadmap/', http_status: 404}
+
+deprecated_operations: []
+
+decay_signals:
+- signal: stdio-package-never-published
+  detail: >-
+    b12io/website-generator-mcp-server declares @b12/website-generator-mcp-server
+    1.0.3 and its README instructs installing it, but the name 404s on npm.
+  severity: high
+  see: packages/b12-packages.yml
+- signal: published-npm-package-stale
+  detail: >-
+    @b12/mcp-server last published 2025-04-03 at 1.0.1, while the remote server
+    reports 1.26.0. The distributed local build is far behind the hosted one.
+  severity: medium
+- signal: deployment-drift
+  detail: >-
+    The two live deployments return different response media types and different
+    tool descriptions and _meta blocks for the same tool name.
+  severity: medium
+
+maintenance_signals:
+- signal: source-repo-active
+  detail: b12io/website-generator-mcp-server last pushed 2026-07-23
+  severity: positive
+- signal: design-system-active
+  detail: '@b12/metronome published 1.1.36 on 2026-07-30 (50 releases)'
+  severity: positive
+- signal: plugin-repo-active
+  detail: b12io/b12-plugins last pushed 2026-08-12, the day before this pass
+  severity: positive
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: 'https://mcp.b12.io/mcp', method: 'POST initialize', http_status: 200, result: 'b12-mcp-server 1.26.0'}
+  - {url: 'https://www.b12.io/changelog/', http_status: 404}
+  - {url: 'https://www.b12.io/status/', http_status: 404}
+  - {url: 'https://www.b12.io/roadmap/', http_status: 404}
+  - {url: 'https://status.b12.io/', http_status: 0, note: NXDOMAIN}

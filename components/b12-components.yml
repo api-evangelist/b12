@@ -1,0 +1,62 @@
+generated: '2026-08-13'
+method: searched
+source: https://github.com/b12io/metronome + https://www.npmjs.com/package/@b12/metronome
+note: >-
+  B12 ships one first-party client-side component library, Metronome, its
+  internal design system, published openly on npm under Apache-2.0. It is not an
+  API integration surface — it is the UI toolkit B12 builds its own product
+  with — but it is a genuine, actively maintained, publicly consumable
+  first-party component distribution.
+
+families:
+- name: Metronome
+  kind: design-system
+  official: true
+  package: '@b12/metronome'
+  registry: npm
+  version: 1.1.36
+  published: '2026-07-30'
+  first_published: '2020-03-23'
+  release_count: 50
+  license: Apache-2.0
+  repository: https://github.com/b12io/metronome
+  install: npm install @b12/metronome
+  description: >-
+    Metronome is the design system B12 uses for developing consistent user
+    experiences across its product.
+  loader: npm/bundler import
+  cdn: null
+  note: >-
+    Actively maintained — most recent release two weeks before this pass. No
+    hosted CDN build or script-tag distribution was found, so the version a
+    consumer gets is pinned by their own lockfile.
+
+embedded_surfaces:
+- name: WebsiteGeneratorPreviewImage
+  kind: mcp-ui-resource
+  official: true
+  uri: ui://WebsiteGeneratorPreviewImage.html?v=2
+  mime_type: text/html;profile=mcp-app
+  description: >-
+    React application rendered inside an MCP host to display the static preview
+    image of a generated website.
+  served_from: https://mcp.b12.io/mcp (resources/list)
+  ui_domain: 9f33849571a88c7220a5c4aa245f32d1.claudemcpcontent.com
+  note: >-
+    An MCP-UI embedded component, not an installable one. It is delivered to the
+    agent host as part of a tool result and cannot be embedded in a third-party
+    page. The preview it renders is static — users cannot edit the site inside
+    it.
+
+not_found:
+- kind: embeddable-widget
+  note: No embeddable B12 site/form widget or JS element library for third-party pages was found.
+- kind: embedded-dashboard
+  note: No embedded analytics or dashboard component is published.
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: 'https://registry.npmjs.org/@b12%2fmetronome', http_status: 200}
+  - {url: 'https://api.github.com/orgs/b12io/repos', http_status: 200}
+  - {url: 'https://mcp.b12.io/mcp', method: 'POST resources/list', http_status: 200}

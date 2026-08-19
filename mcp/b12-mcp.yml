@@ -1,39 +1,175 @@
-generated: '2026-07-18'
-method: searched
+generated: '2026-08-13'
+method: probed
 status: published
-source: https://github.com/b12io/website-generator-mcp-server
+source: https://mcp.b12.io/mcp
+note: >-
+  Upgraded from the 2026-07-18 searched record. The prior file asserted
+  deployment.mode "remote" with endpoint https://b12.io/ — the B12 marketing
+  homepage, which is not an MCP endpoint. A live tools/list POST established the
+  real picture: B12 runs TWO remote MCP deployments (mcp.b12.io/mcp and
+  b12.io/mcp), both anonymous and both answering with the real tool schema.
+
 server:
-  name: b12-website-generator
+  name: b12-mcp-server
   display_name: B12 Website Generator
-  transport: stdio
-  package: '@b12/website-generator-mcp-server'
-  version: 1.0.3
-  bin: b12-mcp-server
-  install: npx -y @b12/website-generator-mcp-server
-  runtime: node
-  license: Apache-2.0
-  author: B12.io
+  version: 1.26.0
+  protocol_version: '2025-06-18'
+  vendor: B12.io
   contact: hello@b12.io
   homepage: https://b12.io/
-  npm: https://www.npmjs.com/package/@b12/website-generator-mcp-server
+  license: Apache-2.0
   repository: https://github.com/b12io/website-generator-mcp-server
-  distribution:
-    - kind: desktop-extension
-      format: dxt
-      manifest: manifest.json
-    - kind: npm
-      package: '@b12/website-generator-mcp-server'
+  remote_repository: https://github.com/b12io/website-generator-mcp
+  capabilities:
+    tools: true
+    resources: true
+    prompts: false
+    experimental: {}
+    tools_list_changed: false
+    resources_subscribe: false
+
+deployment:
+  mode: both
+  endpoint: https://mcp.b12.io/mcp
+  install: npx -y @b12/mcp-server
+  package: https://www.npmjs.com/package/@b12/mcp-server
+  auth: none
+  verified: probed
+  checked: '2026-08-13'
+  note: >-
+    Remote is the primary and current surface; the stdio package is stale (last
+    published 2025-04-03) and is NOT the package B12's own README tells you to
+    install — see packages/b12-packages.yml.
+
+# Two distinct remote deployments were observed, same single tool, different
+# host-app metadata. Both answer anonymously — no OAuth challenge, no API key.
+endpoints:
+- url: https://mcp.b12.io/mcp
+  transport: streamable-http
+  response_content_type: text/event-stream
+  auth: none
+  http_status: 200
+  server_header: nginx/1.28.1
+  host_app: Claude / MCP-UI
+  evidence: tools/list returned 200 with a full inputSchema and outputSchema
+  ui_resource: ui://WebsiteGeneratorPreviewImage.html?v=2
+  ui_domain: 9f33849571a88c7220a5c4aa245f32d1.claudemcpcontent.com
+  file: b12-mcp-tools.json
+- url: https://b12.io/mcp
+  transport: streamable-http
+  response_content_type: application/json
+  auth: none
+  http_status: 200
+  host_app: ChatGPT Apps
+  evidence: >-
+    tools/list returned 200; tool _meta carries openai/outputTemplate and
+    openai/toolInvocation hints rather than the MCP-UI block
+  file: b12-mcp-tools-chatgpt.json
+
+transport_requirements:
+  accept_header_required: application/json, text/event-stream
+  note: >-
+    mcp.b12.io/mcp rejects a request whose Accept header omits either media type
+    with HTTP 406 and JSON-RPC -32600. A bare GET is also 406. See
+    errors/b12-problem-types.yml.
+
 tools:
-  - name: generate_website
-    title: Generate Website
-    description: Generates a website from a business/project name and short description, then presents a link (in markdown format) to sign up and see the website.
-    inputs:
-      - name: name
-        description: The name of the business.
-      - name: description
-        description: The short description of the business in less than 1000 characters.
-notes: >-
-  B12 also publishes a Claude plugin (github.com/b12io/b12-claude-plugin) and a
-  Website Generator GPT (https://www.b12.io/gpts/) that wrap the same
-  website-generation capability. B12 does not publish a general-purpose public
-  REST API; the MCP server is a single-tool website generation surface.
+- name: generate_website
+  title: Generate Website
+  description: >-
+    Generate a website with AI from a project name and description. Returns a
+    static preview image of the generated website and a link to claim and edit
+    the site in a website editor outside of the conversation.
+  input_schema:
+    required: [name, description, image_keywords, subtitle]
+    properties:
+    - name: name
+      type: string
+      description: The name of the business.
+    - name: description
+      type: string
+      description: The short description of the business in less than 1000 characters.
+    - name: image_keywords
+      type: string
+      description: >-
+        Word or short phrase to search the image on an image search engine that
+        best suits the provided business name and description.
+    - name: subtitle
+      type: string
+      description: >-
+        The short and catchy subtitle for hero section of the website in less
+        than 5-10 words.
+  output_schema: object with result[] of MCP TextContent
+  annotations:
+    read_only_hint: false
+    destructive_hint: false
+    open_world_hint: false
+    idempotent: false
+  idempotency_note: >-
+    Explicitly NOT idempotent by the provider's own tool description: "To create
+    a separate, additional website, call the tool again." A retried call creates
+    a second site. There is no idempotency key on this surface.
+  source: live tools/list on https://mcp.b12.io/mcp
+  verbatim: b12-mcp-tools.json
+
+resources:
+- name: WebsiteGeneratorPreviewImage.html
+  uri: ui://WebsiteGeneratorPreviewImage.html?v=2
+  mime_type: text/html;profile=mcp-app
+  description: React application for rendering a website preview image
+
+prompts: []
+
+distribution:
+- kind: remote
+  url: https://mcp.b12.io/mcp
+  status: live
+- kind: remote
+  url: https://b12.io/mcp
+  status: live
+- kind: npm
+  package: '@b12/mcp-server'
+  version: 1.0.1
+  published: '2025-04-03'
+  status: stale
+- kind: npm
+  package: '@b12/website-generator-mcp-server'
+  version: null
+  status: never-published
+  note: >-
+    The repo package.json declares @b12/website-generator-mcp-server 1.0.3 and
+    the README instructs `npx -y @b12/website-generator-mcp-server`, but that
+    name returns HTTP 404 from registry.npmjs.org. The documented stdio install
+    command does not resolve.
+- kind: desktop-extension
+  format: dxt
+  manifest: https://github.com/b12io/website-generator-mcp-server/blob/main/manifest.json
+  version: 1.0.3
+- kind: claude-plugin
+  repository: https://github.com/b12io/b12-plugins
+  note: two provider-published Agent Skills — see skills/_index.yml
+
+related_surfaces:
+- kind: gpt
+  name: Website Generator GPT
+  url: https://www.b12.io/gpts/
+  note: same website-generation capability, used 4 million+ times per B12
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - url: https://mcp.b12.io/mcp
+    method: POST tools/list
+    http_status: 200
+    content_type: text/event-stream
+  - url: https://mcp.b12.io/mcp
+    method: POST initialize
+    http_status: 200
+    result: serverInfo b12-mcp-server 1.26.0, protocolVersion 2025-06-18
+  - url: https://b12.io/mcp
+    method: POST tools/list
+    http_status: 200
+    content_type: application/json
+  - url: https://registry.npmjs.org/@b12%2fwebsite-generator-mcp-server
+    method: GET
+    http_status: 404

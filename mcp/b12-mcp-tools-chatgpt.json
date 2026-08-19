@@ -1,0 +1,50 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "tools": [
+      {
+        "name": "generate_website",
+        "description": "\nGenerate a website with AI. Use the project name and description arguments to provide guidance on the purpose of the website. The description argument may include high-level guidance on site structure or content to include, but not verbatim site copy. Absolutely NEVER invent a name or description, even as an example, and ALWAYS make sure you request the business name and description from the user before calling the tool and creating a website.\n\nOnce you have called this tool, the response will contain a signup nonce (which you should ignore) and a message explaining that a website preview image has been shown to the user above the message. The message also contains a link to claim their website on a website editor outside of ChatGPT (websites are hosted by B12 and can only be edited online using the b12.io software suite).\n\nTo avoid misleading the user, remember that the preview image they see above your response message is completely static. Users cannot add content or sections to the site in the preview panel. If a user asks to edit a site they created, you can send them to b12.io/dashboard to edit their site in the B12 editor, or instruct them to click the \u2018sign up to see your website\u2019 button in the static preview.\n\nIf the user wants a completely new separate website (perhaps related to previous sites they have created), you can call the tool again to generate a new website preview image (static) and signup link.\n",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false,
+          "title": "Generate Website"
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the business."
+            },
+            "description": {
+              "type": "string",
+              "description": "The short description of the business in less than 1000 characters."
+            },
+            "image_keywords": {
+              "type": "string",
+              "description": "Word or short phrase to search the image on an image search engine that best suits the provided business name and description. Avoid generic words like  Services, Products, Training in the search term. Do not use adjectives."
+            },
+            "subtitle": {
+              "type": "string",
+              "description": "The short and catchy subtitle for hero section of the website in less than 5-10 words. It should capture the goal of the website. It should never mention anything about the website color, style or structure."
+            }
+          },
+          "required": [
+            "name",
+            "description",
+            "image_keywords",
+            "subtitle"
+          ]
+        },
+        "_meta": {
+          "openai/outputTemplate": "ui://WebsiteGeneratorPreviewImage.html",
+          "openai/toolInvocation/invoking": "Generating website preview image",
+          "openai/toolInvocation/invoked": "Generated preview image"
+        }
+      }
+    ]
+  }
+}

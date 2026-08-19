@@ -1,0 +1,66 @@
+generated: '2026-08-13'
+method: probed
+source: https://mcp.b12.io/mcp + https://www.b12.io/pricing/
+limit_count: 0
+note: >-
+  B12 publishes NO HTTP rate limit for its MCP surface and returns no rate-limit
+  headers. limit_count is an honest zero: it counts published request-rate
+  limits, and there are none. What B12 does publish is a plan-attached AI credit
+  quota, recorded below as consumption quotas — those govern the product, not
+  the endpoint, and an agent cannot read them at runtime.
+
+limits: []
+
+response_headers:
+  observed: []
+  x_ratelimit: false
+  ratelimit_standard: false
+  retry_after: false
+  exhaustion_status: null
+  note: >-
+    A live tools/list POST to https://mcp.b12.io/mcp returned only
+    cache-control, content-type, date, server (nginx/1.28.1),
+    transfer-encoding and connection. No X-RateLimit-*, no RateLimit-*, no
+    Retry-After. An agent has no runtime backpressure signal on this surface.
+
+quotas:
+- scope: per-account
+  kind: ai-credits
+  plan: Free
+  limit: 5 per day, capped at 30 per month
+  source: https://www.b12.io/pricing/
+- scope: per-account
+  kind: ai-credits
+  plan: Website
+  limit: 200 per month
+  source: https://www.b12.io/pricing/
+- scope: per-account
+  kind: ai-credits
+  plan: Website + Client Engagement
+  limit: 300 per month
+  source: https://www.b12.io/pricing/
+- scope: per-account
+  kind: launched-projects
+  plan: Website
+  limit: 20
+  source: https://www.b12.io/pricing/
+- scope: per-account
+  kind: launched-projects
+  plan: Website + Client Engagement
+  limit: 30
+  source: https://www.b12.io/pricing/
+
+quota_note: >-
+  These quotas bind to a signed-in B12 account. The MCP tool is called
+  anonymously and returns a signup link rather than a provisioned site, so no
+  quota is enforced at the point an agent calls it, and none is reported back.
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - url: https://mcp.b12.io/mcp
+    method: POST tools/list
+    http_status: 200
+    headers_returned: [cache-control, content-type, date, server, transfer-encoding, connection]
+  - url: https://www.b12.io/pricing/
+    http_status: 200

@@ -1,0 +1,136 @@
+generated: '2026-08-13'
+method: probed
+source: https://mcp.b12.io/mcp + https://www.b12.io/robots.txt
+note: >-
+  Standards conformance established by live probe of the MCP surface and the
+  served discovery documents. B12 publishes no certification or compliance
+  program, so no Compliance pointer is emitted.
+
+standards:
+- id: mcp-2025-06-18
+  name: Model Context Protocol 2025-06-18
+  conforms: true
+  evidence: >-
+    initialize returned protocolVersion "2025-06-18" with a capabilities object
+    declaring tools, resources and prompts; tools/list, resources/list and
+    prompts/list all answer.
+
+- id: jsonrpc-2.0
+  name: JSON-RPC 2.0
+  conforms: partial
+  evidence: >-
+    Correct envelope, correct use of -32700 for parse errors. Deviates on
+    method-not-found: an unknown method returns -32602 (Invalid params) rather
+    than the specified -32601, and transport errors replace the request id with
+    the string "server-error" instead of null.
+  see: errors/b12-problem-types.yml
+
+- id: mcp-streamable-http
+  name: MCP Streamable HTTP transport
+  conforms: true
+  evidence: >-
+    POST /mcp with Accept "application/json, text/event-stream" returns
+    text/event-stream frames; the Accept requirement is enforced with 406.
+  note: >-
+    The b12.io/mcp deployment answers the same request with application/json
+    rather than SSE — inconsistent between the two deployments.
+
+- id: mcp-ui
+  name: MCP-UI embedded resource
+  conforms: true
+  evidence: >-
+    resources/list returns ui://WebsiteGeneratorPreviewImage.html?v=2 with
+    mimeType "text/html;profile=mcp-app" and a _meta.ui block carrying a CSP
+    resourceDomains list.
+
+- id: content-signals
+  name: Cloudflare Content Signals Policy
+  conforms: true
+  evidence: >-
+    robots.txt carries "Content-Signal: ai-train=yes, search=yes, ai-input=yes"
+    — an explicit machine-readable AI-usage declaration, opting in to all three.
+  file: well-known/b12-robots.txt
+
+- id: llmstxt
+  name: llms.txt
+  conforms: true
+  evidence: >-
+    https://www.b12.io/llms.txt returns 200 text/plain, 7820 bytes, in llms.txt
+    format (H1, blockquote summary, sectioned link lists).
+  file: llms/b12-llms.txt
+
+- id: robots-txt
+  name: RFC 9309 Robots Exclusion Protocol
+  conforms: true
+  evidence: robots.txt served with a Sitemap directive and per-agent rules.
+
+- id: openapi
+  name: OpenAPI
+  conforms: false
+  evidence: >-
+    No OpenAPI document found on any host. api.b12.io, developer.b12.io and
+    docs.b12.io do not resolve; /openapi.json, /swagger.json, /api-docs and
+    /api/openapi.json all 404 on www.b12.io, b12.io and orchestra.b12.io.
+
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  evidence: No event or webhook surface is published; not applicable.
+
+- id: graphql
+  name: GraphQL
+  conforms: false
+  evidence: No /graphql surface found.
+
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence: >-
+    The MCP endpoint is anonymous. No /.well-known/oauth-authorization-server
+    or /.well-known/oauth-protected-resource on any host (all 404).
+
+- id: oidc
+  name: OpenID Connect Discovery
+  conforms: false
+  evidence: /.well-known/openid-configuration 404.
+
+- id: a2a
+  name: A2A Agent Card
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json both 404 on
+    www.b12.io, mcp.b12.io and orchestra.b12.io.
+
+- id: rfc9457
+  name: RFC 9457 Problem Details
+  conforms: false
+  evidence: Errors use the JSON-RPC error object; no application/problem+json.
+
+- id: rfc9116
+  name: RFC 9116 security.txt
+  conforms: false
+  evidence: /.well-known/security.txt 404.
+
+- id: rfc8594
+  name: RFC 8594 Sunset header
+  conforms: false
+  evidence: No deprecation policy or Sunset/Deprecation header published.
+
+- id: agent-skills
+  name: Agent Skills (frontmatter + markdown)
+  conforms: true
+  evidence: >-
+    B12 publishes two SKILL.md files with name/description frontmatter in
+    b12io/b12-plugins, distributed through a Claude Code plugin marketplace.
+  file: skills/_index.yml
+
+compliance_program:
+  published: false
+  certifications: []
+  note: >-
+    No trust center, no security page, no SOC 2 / ISO 27001 / PCI / HIPAA /
+    FedRAMP claim found. /security, /trust, /compliance all 404 on www.b12.io
+    and trust.b12.io does not resolve. No Compliance pointer is emitted.
+
+x-evidence:
+  fetched: '2026-08-13'

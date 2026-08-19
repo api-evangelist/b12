@@ -1,0 +1,111 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.b12.io/pricing/
+currency: USD
+plan_count: 3
+note: >-
+  B12 sells a SaaS subscription to the website platform, not API access. There
+  is no API pricing, no metered call rate and no developer tier — the MCP server
+  at mcp.b12.io/mcp is free and anonymous, and it converts by returning a signup
+  link. The plans below are the DIY (self-serve) tiers whose prices are
+  published in the served HTML.
+
+plans:
+- name: Free
+  price: 0
+  currency: USD
+  period: month
+  tagline: Get online fast on a B12 subdomain.
+  quota:
+    ai_credits: 5 per day, max 30 per month
+    launched_projects: null
+  includes:
+  - yourbusiness.b12sites.com subdomain
+  - Mobile-responsive site, store, portfolio, blog, or app
+  - Visual editor with AI chat
+  - Invite your team
+  limits:
+    custom_domain: false
+    b12_ads_removed: false
+
+- name: Website
+  price: 49
+  currency: USD
+  period: month
+  promo: $1 / month for first 3 months (new users)
+  tagline: Launch on your own domain with more room to build and edit.
+  quota:
+    ai_credits: 200 per month
+    launched_projects: 20
+  includes:
+  - Everything in Free
+  - Free custom domain (free for the first year)
+  - Advanced team management
+  - Remove B12 ads
+  - Commerce
+  - Backends
+  - Traffic analytics and reporting
+  - Integrations
+  - Email and chat support
+
+- name: Website + Client Engagement
+  price: 78
+  currency: USD
+  period: month
+  promo: $1 / month for first 3 months (new users)
+  tagline: Add the tools to attract, win, and serve clients.
+  most_popular: true
+  quota:
+    ai_credits: 300 per month
+    launched_projects: 30
+  includes:
+  - Everything in Website
+  - Custom email address
+  - Client intake
+  - Email marketing
+  - Contact manager
+  - Contracts and eSignature
+  - File uploads
+
+expert_plans:
+  published_prices: false
+  note: >-
+    A second "Experts do it for you" tab exists and the FAQ names two tiers,
+    Professional and Advanced, in which B12's own design, copywriting and launch
+    team sets up and maintains the site. No price for either is present in the
+    served HTML — the tab's figures are rendered client-side. Recorded as
+    present-without-a-published-price rather than guessed.
+  tiers:
+  - name: Professional
+    price: null
+    description: >-
+      A fully supported website set up by a team of experts. Custom domain plus
+      all Website + Client Engagement features, with email, chat and phone
+      support and the option to work with B12 copywriting, design and launch
+      specialists.
+  - name: Advanced
+    price: null
+    description: >-
+      For businesses with teams that need more seats, more coordination and
+      priority support.
+
+billing:
+  periods: [monthly, yearly]
+  note: >-
+    A monthly/yearly toggle is published; only the monthly figures are in the
+    served HTML, so no annual price is recorded here.
+  promotion: 'Limited time: try B12 $1/mo for 3 months'
+
+api_pricing:
+  charged: false
+  note: >-
+    The MCP endpoint answered anonymously with no key, no quota header and no
+    payment challenge. Website generation via MCP/GPT is free; B12 monetizes at
+    the signup link that the tool returns.
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - url: https://www.b12.io/pricing/
+    http_status: 200
+    content_type: text/html

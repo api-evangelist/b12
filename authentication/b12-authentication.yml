@@ -1,0 +1,77 @@
+generated: '2026-08-13'
+method: probed
+source: https://mcp.b12.io/mcp
+note: >-
+  Not derived from OpenAPI — B12 publishes none. This profile was established by
+  calling the live MCP endpoint anonymously and confirming it answers. The
+  authentication model of B12's only machine-callable surface is: there is none.
+
+summary:
+  types: [none]
+  api_key_in: []
+  oauth2_flows: []
+  authenticated: false
+
+schemes:
+- name: anonymous
+  type: none
+  surface: mcp
+  endpoint: https://mcp.b12.io/mcp
+  sources: [mcp/b12-mcp.yml]
+  evidence: >-
+    POST tools/list and POST initialize both returned HTTP 200 with a complete
+    result and no Authorization header supplied. No 401, no WWW-Authenticate,
+    no OAuth challenge.
+- name: anonymous
+  type: none
+  surface: mcp
+  endpoint: https://b12.io/mcp
+  sources: [mcp/b12-mcp.yml]
+  evidence: POST tools/list returned HTTP 200 unauthenticated.
+
+oauth_discovery:
+  oauth_authorization_server: 404
+  oauth_protected_resource: 404
+  openid_configuration: 404
+  note: >-
+    Probed on both www.b12.io and mcp.b12.io. No OAuth or OIDC discovery
+    document is served, consistent with an unauthenticated surface. No
+    scopes/ artifact is written — there is no scope surface to record.
+
+user_authentication:
+  note: >-
+    End users authenticate to the B12 product itself at https://b12.io/signup/
+    and https://b12.io/dashboard. That is a human web login, not an API
+    credential, and it is not reachable by an agent. The generate_website tool
+    deliberately defers it: the tool returns a signup link and the human
+    authenticates afterwards.
+
+agent_implications:
+  can_call_unauthenticated: true
+  credential_required: false
+  identity_of_caller: not established
+  note: >-
+    An agent can call generate_website with no credential and no account. B12
+    cannot attribute the call to a customer, which is why the tool returns a
+    claim link instead of a provisioned resource. This is a deliberate design,
+    not a gap, but it does mean there is no per-caller authorization, no
+    revocation path, and no way for a customer to scope what an agent may do on
+    their behalf.
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - url: https://mcp.b12.io/mcp
+    method: POST initialize
+    http_status: 200
+    auth_supplied: none
+  - url: https://mcp.b12.io/mcp
+    method: POST tools/list
+    http_status: 200
+    auth_supplied: none
+  - url: https://mcp.b12.io/.well-known/oauth-protected-resource
+    http_status: 404
+  - url: https://mcp.b12.io/.well-known/oauth-authorization-server
+    http_status: 404
+  - url: https://www.b12.io/.well-known/openid-configuration
+    http_status: 404

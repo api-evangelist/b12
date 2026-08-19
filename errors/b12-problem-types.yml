@@ -1,0 +1,102 @@
+generated: '2026-08-13'
+method: probed
+source: https://mcp.b12.io/mcp
+format: jsonrpc-2.0
+note: >-
+  Not derived from OpenAPI — B12 publishes none, and it publishes no error
+  reference either. Every entry below was observed by sending a deliberately
+  malformed or unacceptable request to the live MCP endpoint and recording what
+  came back verbatim. RFC 9457 problem+json is not used; the envelope is the
+  JSON-RPC 2.0 error object.
+
+envelope:
+  shape: '{"jsonrpc":"2.0","id":<id|"server-error">,"error":{"code":<int>,"message":<string>,"data":<optional>}}'
+  transport_note: >-
+    Errors are returned either as a bare JSON body or inside a text/event-stream
+    `data:` frame depending on whether the request was acceptable enough to open
+    a stream. Both forms carry the same object.
+  id_note: >-
+    On transport-level failures the server substitutes the string
+    "server-error" for the request id rather than echoing it or using null.
+    A strict JSON-RPC client expecting null or the original id will not match
+    the response to its request.
+
+problems:
+- code: -32700
+  name: Parse error
+  http_status: 200
+  message_observed: >-
+    Parse error: Expecting property name enclosed in double quotes: line 1
+    column 2 (char 1)
+  cause: Request body is not valid JSON.
+  remediation: Send a syntactically valid JSON-RPC 2.0 request body.
+  trigger_used: 'POST body {not json}'
+  note: >-
+    The upstream Python parser message is passed through to the caller
+    verbatim, including line/column detail.
+
+- code: -32600
+  name: Invalid Request — Not Acceptable
+  http_status: 406
+  message_observed: 'Not Acceptable: Client must accept text/event-stream'
+  cause: >-
+    Request did not advertise text/event-stream in its Accept header, or was a
+    bare GET on /mcp.
+  remediation: 'Send Accept: application/json, text/event-stream'
+  trigger_used: GET https://mcp.b12.io/mcp
+
+- code: -32600
+  name: Invalid Request — Not Acceptable (both types)
+  http_status: 200
+  message_observed: >-
+    Not Acceptable: Client must accept both application/json and
+    text/event-stream
+  cause: Accept header carried application/json only.
+  remediation: 'Send Accept: application/json, text/event-stream'
+  trigger_used: 'POST with Accept: application/json'
+  note: >-
+    Same code as the 406 case but returned with HTTP 200. The HTTP status and
+    the JSON-RPC code disagree about whether this request succeeded, so a client
+    that branches on HTTP status alone will treat a rejection as a success.
+
+- code: -32602
+  name: Invalid request parameters
+  http_status: 200
+  message_observed: Invalid request parameters
+  data_observed: '""'
+  cause: Unknown or unsupported JSON-RPC method.
+  remediation: >-
+    Call a method the server implements — initialize, tools/list, tools/call,
+    resources/list, prompts/list.
+  trigger_used: '{"jsonrpc":"2.0","id":1,"method":"does/not/exist"}'
+  note: >-
+    An unknown method returns -32602 (Invalid params) where JSON-RPC 2.0
+    specifies -32601 (Method not found). `data` is an empty string rather than
+    absent or structured. A client keyed on -32601 will not detect an
+    unsupported method.
+
+deviations:
+- id: unknown-method-wrong-code
+  detail: unknown method returns -32602 instead of the specified -32601
+- id: http-status-disagrees-with-rpc-error
+  detail: an Accept-header rejection is returned with HTTP 200 in one path and HTTP 406 in another
+- id: id-substitution
+  detail: transport errors replace the request id with the string "server-error"
+- id: no-rfc9457
+  detail: no application/problem+json anywhere on the surface
+
+tool_level_errors:
+  documented: false
+  note: >-
+    No published reference describes what generate_website returns on failure.
+    Establishing that would require actually invoking tools/call, which creates
+    a real website draft on B12's infrastructure — a side effect this pipeline
+    does not take. Recorded as unknown rather than guessed.
+
+x-evidence:
+  fetched: '2026-08-13'
+  probes:
+  - {url: 'https://mcp.b12.io/mcp', method: 'POST malformed JSON', http_status: 200, rpc_code: -32700}
+  - {url: 'https://mcp.b12.io/mcp', method: 'GET', http_status: 406, rpc_code: -32600}
+  - {url: 'https://mcp.b12.io/mcp', method: 'POST Accept: application/json', http_status: 200, rpc_code: -32600}
+  - {url: 'https://mcp.b12.io/mcp', method: 'POST unknown method', http_status: 200, rpc_code: -32602}
