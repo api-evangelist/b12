@@ -41,6 +41,17 @@ tags:
 - Company
 - Enterprise
 - Website Builder
+- Artificial Intelligence
+- No-Code
+- Small Business
+- Website Generation
+- MCP
+- SEO
+- Payments
+tags_raw:
+- Company
+- Enterprise
+- Website Builder
 - AI
 - No-Code
 - Small Business
@@ -61,6 +72,10 @@ apis:
   humanURL: https://github.com/b12io/website-generator-mcp-server
   baseURL: https://mcp.b12.io/mcp
   tags:
+  - MCP
+  - Website Generation
+  - Artificial Intelligence
+  tags_raw:
   - Model Context Protocol
   - Website Generation
   - AI
