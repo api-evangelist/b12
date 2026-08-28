@@ -16,6 +16,18 @@ description: >-
   GPT, but publishes no general-purpose public REST API, no OpenAPI, and no
   developer portal.
 url: https://raw.githubusercontent.com/api-evangelist/b12/refs/heads/main/apis.yml
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: unknown
