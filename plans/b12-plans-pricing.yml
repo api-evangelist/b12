@@ -109,3 +109,32 @@ x-evidence:
   - url: https://www.b12.io/pricing/
     http_status: 200
     content_type: text/html
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - subscription
+  units: []
+  plans:
+  - name: Free
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: Website
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: Website + Client Engagement
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - month
