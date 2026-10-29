@@ -64,6 +64,111 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-B12 is a company surfaced as a portfolio company of general-catalyst and added to the API Evangelist network as a stub for enrichment. Sector: enterprise. This profile is a lead awaiting the enrichment pipeline.
+B12 is an AI-powered website builder that generates professional websites, online stores, and web apps from a short prompt. Founded on a human-in-the-loop model and now driven by its B12 3.0 AI Agent (launched February 2026), the platform lets solopreneurs, consultants, freelancers, and growing teams describe a business idea and launch a site in minutes, then run that business online with built-in tools for SEO, online payments and invoicing, scheduling, email marketing, client intake, contact management, and contracts with eSignatures. B12 offers self-serve DIY plans as well as Expert plans where its design and content team handles setup and ongoing updates. Over 4 million websites have been built on B12. B12 exposes its website-generation capability to AI agents through two live, anonymous, remote Model Context Protocol (MCP) endpoints, two provider-published Claude Agent Skills, and a Website Generator GPT, but publishes no general-purpose public REST API, no OpenAPI, and no developer portal.
 
-Backed by: general-catalyst — https://www.b12.io
+**Areas:** Company · Enterprise · Website Builder · Artificial Intelligence · No-Code · Small Business · Website Generation · MCP · SEO · Payments
+
+## B12 on APIs.io
+
+Everything profiled for B12 is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/b12/](https://apis.io/providers/b12/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [B12 Website Generator MCP Server](https://apis.io/apis/b12/b12-website-generator-mcp-server/) — B12's Model Context Protocol server, and the only machine-callable surface B12 publishes. It exposes a single tool, generate_website, which builds a website…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [b12-mcp-server](https://apis.io/servers/b12/b12-mcp-server/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [B12 Authentication](https://apis.io/security/b12/b12-authentication/)
+- [B12 Domain Security](https://apis.io/security/b12/b12-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [B12 Plans Pricing](https://apis.io/plans/b12/b12-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [B12 Rate Limits](https://apis.io/rate-limits/b12/b12-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.b12.io)
+- [Pricing](https://www.b12.io/pricing/)
+- [Sign up](https://b12.io/signup/)
+- [Support](https://www.b12.io/support/)
+- [Blog](https://www.b12.io/resource-center/)
+- [Terms of service](https://www.b12.io/terms-of-service/)
+- [Privacy policy](https://www.b12.io/privacy-policy/)
+- [GitHub](https://github.com/b12io)
+
+## API Evangelist rating
+
+**Kin Score 29.4** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 26.2 |
+| Access clarity | 69.7 |
+
+**Agent readiness 22.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | yes |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 20.8** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/b12/](https://apis.io/providers/b12/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for B12: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/b12/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
